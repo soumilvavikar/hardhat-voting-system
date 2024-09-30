@@ -72,13 +72,6 @@ contract VotingSystem {
     }
 
     /**
-     * This function will get the contesting parties list
-     */
-    function getContestingParties() external view returns (string[] memory) {
-        return s_parties;
-    }
-
-    /**
      * This function will declare the winner.
      */
     function declareResult() external view returns (string memory) {
@@ -103,10 +96,24 @@ contract VotingSystem {
     }
 
     /** Getter functions */
+
+    /**
+     * This function will get the contesting parties list
+     */
+    function getContestingParties() external view returns (string[] memory) {
+        return s_parties;
+    }
+
+    /**
+     *  This function will return the election counter
+     */
     function getElectionCounter() external view returns (uint256) {
         return s_electionCounter;
     }
 
+    /**
+     * This function will return the counter of the contesting parties
+     */
     function noOfContestingParties() public view returns (uint256) {
         return s_parties.length;
     }
