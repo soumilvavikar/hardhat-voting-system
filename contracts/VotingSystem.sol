@@ -58,9 +58,9 @@ contract VotingSystem {
      * This function will validate whether the incoming party is valid or not. i.e. is it present in the list of contesting parties.
      * @param party incoming party
      */
-    function isValidParty(string memory party) private view returns (bool) {
+    function isValidParty(string memory party) public view returns (bool) {
         // Checking if the election process has been started
-        require (0 != s_parties.length);
+        require(0 != s_parties.length);
 
         // Checking if the party passed to the function is present in the list of contesting parties
         for (uint i = 0; i < s_parties.length; i++) {
@@ -85,21 +85,29 @@ contract VotingSystem {
         uint256 maxVotes = 0;
         string memory partyWithMaxVotes;
 
-        console.log("Election Number: ", s_electionCounter);
+        // console.log("Election Number: ", s_electionCounter);
         for (uint i = 0; i < s_parties.length; i++) {
-            console.log("Contesting Party: ", s_parties[i]);
-            console.log(
-                "No. of votes recieved by the party: ",
-                s_votesReceived[s_electionCounter][s_parties[i]]
-            );
+            //console.log("Contesting Party: ", s_parties[i]);
+            // console.log(
+            //     "No. of votes recieved by the party: ",
+            //     s_votesReceived[s_electionCounter][s_parties[i]]
+            // );
             if (maxVotes < s_votesReceived[s_electionCounter][s_parties[i]]) {
                 maxVotes = s_votesReceived[s_electionCounter][s_parties[i]];
                 partyWithMaxVotes = s_parties[i];
             }
         }
 
-        console.log("Winner of the Elections: ", partyWithMaxVotes);
-
+        // console.log("Winner of the Elections: ", partyWithMaxVotes);
         return partyWithMaxVotes;
+    }
+
+    /** Getter functions */
+    function getElectionCounter() external view returns (uint256) {
+        return s_electionCounter;
+    }
+
+    function noOfContestingParties() public view returns (uint256) {
+        return s_parties.length;
     }
 }
